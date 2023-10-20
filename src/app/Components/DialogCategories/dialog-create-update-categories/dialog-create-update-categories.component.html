@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{ actionTitle }} Categoría </h1>
+<div mat-dialog-content>
+    
+    <form [formGroup]="formCategories">
+        <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Descripción Categoría</mat-label>
+                    <input matInput formControlName="description" autocomplete="off">
+                  </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="warn"> Cerrar </button>
+  <button mat-raised-button color="primary" (click)="createUpdateCategories()" [disabled]="formCategories.invalid"> 
+    {{actionButton}}
+  </button>
+
+</div>

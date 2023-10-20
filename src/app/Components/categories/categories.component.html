@@ -1,0 +1,53 @@
+<div style="width: 70%; margin: 40px auto;">
+    <h1> Lista de Categorias </h1>
+
+    <button mat-raised-button color="primary" (click)="openDialogCreateCategories()">Crear Categoría</button>
+
+    <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.status; else notStatus">
+                {{ 'Activo' }}
+              </ng-container>
+              <ng-template #notStatus>
+                {{ 'Desactivado' }}
+              </ng-template>
+            </td>
+          </ng-container>
+    
+
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Acciones</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button matTooltip="Editar Tarea" color="primary" (click)="openDialogUpdateCategories(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar Tarea" color="warn" (click)="openDialogDeleteCategories(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+            </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      
+</div>

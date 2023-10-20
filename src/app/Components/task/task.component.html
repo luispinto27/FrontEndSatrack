@@ -1,0 +1,77 @@
+<div style="width: 70%; margin: 40px auto;">
+    <h1> Lista de Tareas </h1>
+
+    <button mat-raised-button color="primary" (click)="openDialogCreateTask()">Crear Tarea</button>
+
+    <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="FechaCreacion">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creación </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateCreated}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="FechaLimite">
+            <th mat-header-cell *matHeaderCellDef> Fecha Limite </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateLimited}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="Completada">
+            <th mat-header-cell *matHeaderCellDef> Finalizada </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.isCompleted; else notCompleted">
+                {{ 'Sí, finalizada' }}
+              </ng-container>
+              <ng-template #notCompleted>
+                {{ 'No, finalizada' }}
+              </ng-template>
+            </td>
+          </ng-container>
+
+        <ng-container matColumnDef="Categoria">
+            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+            <td mat-cell *matCellDef="let element"> {{element.category.description}} </td>
+            </ng-container>
+
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Acciones</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button matTooltip="Editar Tarea" color="primary" (click)="openDialogUpdateTask(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar Tarea" color="warn" (click)="openDialogDeleteTask(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Completar Tarea" color="basic" (click)="openDialogCompletedTask(element)">
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Asignar Categoria" color="accent" (click)="openDialogAsignedCategory(element)">
+                  <mat-icon>find_replace</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Asignar Fecha Limite" color="primary" (click)="openDialogAsignedDateLimited(element)">
+                  <mat-icon>date_range</mat-icon>
+                </button>
+
+            </td>
+            </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      
+</div>

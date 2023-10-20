@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Asignar Fecha Limite</h1>
+<div mat-dialog-content>
+    
+    <form [formGroup]="formTask">
+        <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile>
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Fecha Limite</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateLimited">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="warn"> Cerrar </button>
+  <button mat-raised-button color="primary" (click)="asignedDateLimited()" [disabled]="formTask.invalid"> 
+    Asignar
+  </button>
+
+</div>

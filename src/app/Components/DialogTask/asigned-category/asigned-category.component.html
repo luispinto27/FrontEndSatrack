@@ -1,0 +1,26 @@
+<h1 mat-dialog-title> Asignar Categoria </h1>
+<div mat-dialog-content>
+    
+    <form [formGroup]="formTask">
+        <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Categorías</mat-label>
+                    <mat-select formControlName="categoryId">
+                      <mat-option *ngFor="let item of CategoryList" [value]="item.categoryId">
+                        {{item.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="warn"> Cerrar </button>
+  <button mat-raised-button color="primary" (click)="asignedCategory()" [disabled]="formTask.invalid"> 
+    Asignar
+  </button>
+
+</div>
